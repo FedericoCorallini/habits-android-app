@@ -8,15 +8,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fcorallini.habits.authentication.domain.usecases.LoginUseCase
 import com.fcorallini.habits.authentication.domain.usecases.PasswordResult
+import com.fcorallini.habits.authentication.domain.usecases.ValidateEmailUseCase
 import com.fcorallini.habits.authentication.domain.usecases.ValidatePasswordUseCase
+import com.fcorallini.habits.core.di.IoDispatcher
+import com.fcorallini.habits.core.di.MainDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val validatePasswordUseCase: ValidatePasswordUseCase
+    private val validatePasswordUseCase: ValidatePasswordUseCase,
+    private val validateEmailUseCase: ValidateEmailUseCase,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     var state by mutableStateOf(LoginState())
@@ -46,7 +52,7 @@ class LoginViewModel @Inject constructor(
             passwordError = null
         )
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(state.email).matches()) {
+        if (!validateEmailUseCase(state.email)) {
             state = state.copy(
                 emailError = "invalid email"
             )
@@ -61,7 +67,7 @@ class LoginViewModel @Inject constructor(
 
         if(state.passwordError == null && state.emailError == null){
             state = state.copy(isLoading = true)
-            viewModelScope.launch {
+            viewModelScope.launch(dispatcher) {
                 loginUseCase(state.email, state.password).onSuccess {
                     state = state.copy(isLoggedIn = true)
                 }.onFailure {

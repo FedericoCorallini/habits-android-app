@@ -106,7 +106,7 @@ fun DetailScreen(
                 ), keyboardActions = KeyboardActions(
                     onAny = { viewModel.onEvent(DetailEvent.HabitSave) }
                 ),
-                contentDescription = ""
+                contentDescription = "Enter habit name"
             )
             DetailFrequency(
                 selectedDays = state.frequency,

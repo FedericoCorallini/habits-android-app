@@ -9,10 +9,10 @@ class ValidatePasswordUseCase @Inject constructor(){
                 PasswordResult.Invalid("Password must have at least 6 characters")
             }
             !password.any{ it.isLowerCase() } -> {
-                PasswordResult.Invalid("Password must have at least 1 uppercase")
+                PasswordResult.Invalid("Password must have at least 1 lowercase")
             }
             !password.any{ it.isUpperCase() } -> {
-                PasswordResult.Invalid("Password must have at least 1 lowercase")
+                PasswordResult.Invalid("Password must have at least 1 uppercase")
             }
             !password.any{ it.isDigit() } -> {
                 PasswordResult.Invalid("Password must have at least 1 digit")

@@ -19,7 +19,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.fcorallini.habits.HiltTestRunner"
     }
 
     buildTypes {
@@ -89,7 +89,9 @@ dependencies {
     androidTestImplementation(libs.androidx.work.testing)
     //kapt(libs.androidx.hilt.compiler)
     implementation(libs.androidx.hilt.work)
-    //kaptAndroidTest(libs.hilt.android.compiler)
-    //androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.core.ktx)
 
 }
