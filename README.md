@@ -6,6 +6,6 @@ This project features a **modularized architecture** following the principles of
 
 The app supports **offline-first usage** powered by **Room** as the local database, and syncs seamlessly with a **Firebase** backend for authentication and cloud storage. Background tasks are managed with **WorkManager**, and custom reminders are scheduled using **AlarmManager**.
 
-![Login](docs/screenshots/login_screen.png)
-![Home](docs/screenshots/home_screen.png)
-![New Habit](docs/screenshots/create_screen.png)
+<img src="docs/screenshots/login_screen.png" alt="Login Screen" width="300"/>
+<img src="docs/screenshots/home_screen.png" alt="Home Screen" width="300"/>
+<img src="docs/screenshots/create_screen.png" alt="Create Habit Screen" width="300"/>
