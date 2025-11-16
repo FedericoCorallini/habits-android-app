@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -10,6 +11,23 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/authentication" />
+            <option value="$PROJECT_DIR$/authentication/authentication_data" />
+            <option value="$PROJECT_DIR$/authentication/authentication_domain" />
+            <option value="$PROJECT_DIR$/authentication/authentication_presentation" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core_data" />
+            <option value="$PROJECT_DIR$/core/core_presentation" />
+            <option value="$PROJECT_DIR$/home" />
+            <option value="$PROJECT_DIR$/home/home_data" />
+            <option value="$PROJECT_DIR$/home/home_domain" />
+            <option value="$PROJECT_DIR$/home/home_presentation" />
+            <option value="$PROJECT_DIR$/onboarding" />
+            <option value="$PROJECT_DIR$/onboarding/onboarding_data" />
+            <option value="$PROJECT_DIR$/onboarding/onboarding_domain" />
+            <option value="$PROJECT_DIR$/onboarding/onboarding_presentation" />
+            <option value="$PROJECT_DIR$/settings" />
+            <option value="$PROJECT_DIR$/settings/settings_presentation" />
           </set>
         </option>
       </GradleProjectSettings>

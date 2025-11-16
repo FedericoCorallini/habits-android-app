@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fcorallini.habits">
+
+    <application
+        android:name="dagger.hilt.android.testing.HiltTestApplication"
+        tools:replace="android:name">
+
+        <receiver
+            android:name="com.fcorallini.home_data.startup.BootReceiver"
+            tools:node="remove" />
+    </application>
+</manifest>

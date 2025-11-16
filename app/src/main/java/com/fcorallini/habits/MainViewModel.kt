@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fcorallini.habits.authentication.domain.usecases.GetUserIdUseCase
-import com.fcorallini.habits.authentication.domain.usecases.LogoutUseCase
-import com.fcorallini.habits.onboarding.domain.usecases.HasSeenOnboardingUseCase
+import com.fcorallini.authentication_domain.usecases.GetUserIdUseCase
+import com.fcorallini.authentication_domain.usecases.LogoutUseCase
+import com.fcorallini.onboarding_domain.usecases.HasSeenOnboardingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -48,12 +48,14 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -62,27 +64,20 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
-    implementation(libs.core)
-    implementation(libs.clock)
+
     implementation(libs.navigation.compose)
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics.ktx)
-    implementation(libs.firebase.auth.ktx)
+
     implementation(libs.play.services.auth)
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.coil.compose)
-    implementation(libs.accompanist.pager)
-    implementation(libs.accompanist.pager.indicators)
+
     implementation(libs.accompanist.permissions)
     implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.retrofit)
-    implementation(libs.converter.moshi)
-    implementation(libs.logging.interceptor)
-    implementation(libs.androidx.work.runtime.ktx)
+
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     testImplementation(libs.mockk)
@@ -94,4 +89,16 @@ dependencies {
     androidTestImplementation(libs.androidx.rules)
     androidTestImplementation(libs.core.ktx)
 
+    implementation(project(":core:core_presentation"))
+    implementation(project(":core:core_data"))
+    implementation(project(":settings:settings_presentation"))
+    implementation(project(":onboarding:onboarding_presentation"))
+    implementation(project(":onboarding:onboarding_domain"))
+    implementation(project(":onboarding:onboarding_data"))
+    implementation(project(":authentication:authentication_data"))
+    implementation(project(":authentication:authentication_domain"))
+    implementation(project(":authentication:authentication_presentation"))
+    implementation(project(":home:home_data"))
+    implementation(project(":home:home_domain"))
+    implementation(project(":home:home_presentation"))
 }

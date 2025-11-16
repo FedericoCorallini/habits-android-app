@@ -1,12 +1,12 @@
 package com.fcorallini.habits.authentication.presentation.login
 
-import com.fcorallini.habits.authentication.data.matcher.EmailMatcherImpl
-import com.fcorallini.habits.authentication.data.repository.AuthenticationRepositoryImpl
+import com.fcorallini.authentication_data.matcher.EmailMatcherImpl
+import com.fcorallini.authentication_data.repository.AuthenticationRepositoryImpl
 import com.fcorallini.habits.authentication.data.repository.FakeAuthenticationRepository
-import com.fcorallini.habits.authentication.domain.matcher.EmailMatcher
-import com.fcorallini.habits.authentication.domain.usecases.LoginUseCase
-import com.fcorallini.habits.authentication.domain.usecases.ValidateEmailUseCase
-import com.fcorallini.habits.authentication.domain.usecases.ValidatePasswordUseCase
+import com.fcorallini.authentication_domain.matcher.EmailMatcher
+import com.fcorallini.authentication_domain.usecases.LoginUseCase
+import com.fcorallini.authentication_domain.usecases.ValidateEmailUseCase
+import com.fcorallini.authentication_domain.usecases.ValidatePasswordUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -19,7 +19,7 @@ import org.junit.Test
 
 class LoginViewModelTest {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var loginViewModel: com.fcorallini.authentication_presentation.login.LoginViewModel
     private lateinit var authenticationRepository: FakeAuthenticationRepository
 
     private var dispatcher = StandardTestDispatcher()
@@ -28,16 +28,19 @@ class LoginViewModelTest {
     @Before
     fun setUp() {
         authenticationRepository = FakeAuthenticationRepository()
-        val loginUseCase = LoginUseCase(authenticationRepository)
-        val validatePasswordUseCase = ValidatePasswordUseCase()
-        val validateEmailUseCase = ValidateEmailUseCase(
-            object : EmailMatcher {
-                override fun isValid(email: String): Boolean {
-                    return email.isNotEmpty()
+        val loginUseCase =
+            com.fcorallini.authentication_domain.usecases.LoginUseCase(authenticationRepository)
+        val validatePasswordUseCase =
+            com.fcorallini.authentication_domain.usecases.ValidatePasswordUseCase()
+        val validateEmailUseCase =
+            com.fcorallini.authentication_domain.usecases.ValidateEmailUseCase(
+                object : com.fcorallini.authentication_domain.matcher.EmailMatcher {
+                    override fun isValid(email: String): Boolean {
+                        return email.isNotEmpty()
+                    }
                 }
-            }
-        )
-        loginViewModel = LoginViewModel(
+            )
+        loginViewModel = com.fcorallini.authentication_presentation.login.LoginViewModel(
             loginUseCase,
             validatePasswordUseCase,
             validateEmailUseCase,
@@ -50,7 +53,7 @@ class LoginViewModelTest {
         val state = loginViewModel.state
 
         assertEquals(
-            LoginState(
+            com.fcorallini.authentication_presentation.login.LoginState(
                 email = "",
                 password = "",
                 emailError = null,
@@ -65,8 +68,8 @@ class LoginViewModelTest {
 
     @Test
     fun `given invalid email, show email error`() {
-        loginViewModel.onEvent(LoginEvent.EmailChanged(""))
-        loginViewModel.onEvent(LoginEvent.Login)
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.EmailChanged(""))
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.Login)
         assertNotNull(loginViewModel.state.emailError)
     }
 
@@ -74,7 +77,7 @@ class LoginViewModelTest {
     fun `given an email, validate that the email state changes`() {
         var state = loginViewModel.state
         assertEquals(state.email, "")
-        loginViewModel.onEvent(LoginEvent.EmailChanged("email@example.com"))
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.EmailChanged("email@example.com"))
         state = loginViewModel.state
         assertEquals(state.email, "email@example.com")
     }
@@ -82,9 +85,9 @@ class LoginViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `set valid details, Login, starts loading, then log in`() = scope.runTest {
-        loginViewModel.onEvent(LoginEvent.EmailChanged("email@example.com"))
-        loginViewModel.onEvent(LoginEvent.PasswordChanged("Pass1234"))
-        loginViewModel.onEvent(LoginEvent.Login)
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.EmailChanged("email@example.com"))
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.PasswordChanged("Pass1234"))
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.Login)
         var state = loginViewModel.state
         assertNull(state.passwordError)
         assertNull(state.emailError)
@@ -98,9 +101,9 @@ class LoginViewModelTest {
     @Test
     fun `set valid details but server error, Login, starts loading, then log in`() = scope.runTest {
         authenticationRepository.fakeError = true
-        loginViewModel.onEvent(LoginEvent.EmailChanged("email@example.com"))
-        loginViewModel.onEvent(LoginEvent.PasswordChanged("Pass1234"))
-        loginViewModel.onEvent(LoginEvent.Login)
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.EmailChanged("email@example.com"))
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.PasswordChanged("Pass1234"))
+        loginViewModel.onEvent(com.fcorallini.authentication_presentation.login.LoginEvent.Login)
         var state = loginViewModel.state
         assertNull(state.passwordError)
         assertNull(state.emailError)

@@ -16,7 +16,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import androidx.work.Configuration
@@ -24,15 +23,14 @@ import androidx.work.testing.SynchronousExecutor
 import androidx.work.testing.WorkManagerTestInitHelper
 import com.fcorallini.habits.MainActivity
 import com.fcorallini.habits.home.data.repository.FakeHomeRepository
-import com.fcorallini.habits.home.domain.detail.usecases.GetHabitByIdUseCase
-import com.fcorallini.habits.home.domain.detail.usecases.InsertHabitUseCase
-import com.fcorallini.habits.home.domain.home.usecases.CompleteHabitUseCase
-import com.fcorallini.habits.home.domain.home.usecases.GetHabitsForDateUseCase
-import com.fcorallini.habits.home.domain.home.usecases.SyncHabitsUseCase
-import com.fcorallini.habits.home.presentation.detail.DetailScreen
-import com.fcorallini.habits.home.presentation.detail.DetailViewModel
-import com.fcorallini.habits.home.presentation.home.HomeScreen
-import com.fcorallini.habits.home.presentation.home.HomeViewModel
+import com.fcorallini.home_domain.detail.usecases.GetHabitByIdUseCase
+import com.fcorallini.home_domain.detail.usecases.InsertHabitUseCase
+import com.fcorallini.home_domain.home.usecases.CompleteHabitUseCase
+import com.fcorallini.home_domain.home.usecases.GetHabitsForDateUseCase
+import com.fcorallini.home_domain.home.usecases.SyncHabitsUseCase
+import com.fcorallini.home_presentation.detail.DetailScreen
+import com.fcorallini.home_presentation.detail.DetailViewModel
+import com.fcorallini.home_presentation.home.HomeViewModel
 import com.fcorallini.habits.navigation.Routes
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -68,21 +66,31 @@ class CreateHabitE2E {
 
         homeRepository = FakeHomeRepository()
         homeViewModel = HomeViewModel(
-            completeHabitUseCase = CompleteHabitUseCase(homeRepository),
-            getHabitsForDateUseCase = GetHabitsForDateUseCase(homeRepository),
-            syncHabitsUseCase = SyncHabitsUseCase(homeRepository)
+            completeHabitUseCase = CompleteHabitUseCase(
+                homeRepository
+            ),
+            getHabitsForDateUseCase = GetHabitsForDateUseCase(
+                homeRepository
+            ),
+            syncHabitsUseCase = SyncHabitsUseCase(
+                homeRepository
+            )
         )
         detailViewModel = DetailViewModel(
             savedStateHandle = SavedStateHandle(),
-            insertHabitUseCase = InsertHabitUseCase(homeRepository),
-            getHabitByIdUseCase = GetHabitByIdUseCase(homeRepository)
+            insertHabitUseCase = InsertHabitUseCase(
+                homeRepository
+            ),
+            getHabitByIdUseCase = GetHabitByIdUseCase(
+                homeRepository
+            )
         )
 
         composeRule.activity.setContent {
             navController = rememberNavController()
             NavHost(navController = navController, startDestination = Routes.Home) {
                 composable<Routes.Home> {
-                    HomeScreen(
+                    com.fcorallini.home_presentation.home.HomeScreen(
                         onSettings = {
                             navController.navigate(Routes.Settings)
                         },

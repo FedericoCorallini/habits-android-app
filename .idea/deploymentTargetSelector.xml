@@ -5,10 +5,10 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="createHabit()">
+      <SelectionState runConfigName="CreateHabitE2E">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="CreateHabitE2E">
+      <SelectionState runConfigName="core.core_domain">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

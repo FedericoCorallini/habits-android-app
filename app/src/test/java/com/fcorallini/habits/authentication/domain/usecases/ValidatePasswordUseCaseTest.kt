@@ -7,11 +7,12 @@ import org.junit.Test
 
 class ValidatePasswordUseCaseTest {
 
-    lateinit var validatePasswordUseCase : ValidatePasswordUseCase
+    lateinit var validatePasswordUseCase : com.fcorallini.authentication_domain.usecases.ValidatePasswordUseCase
 
     @Before
     fun setup() {
-        validatePasswordUseCase = ValidatePasswordUseCase()
+        validatePasswordUseCase =
+            com.fcorallini.authentication_domain.usecases.ValidatePasswordUseCase()
     }
 
     @Test
@@ -19,7 +20,7 @@ class ValidatePasswordUseCaseTest {
         val input = "asd"
         val result = validatePasswordUseCase(input)
 
-        assertEquals(PasswordResult.Invalid("Password must have at least 6 characters"), result)
+        assertEquals(com.fcorallini.authentication_domain.usecases.PasswordResult.Invalid("Password must have at least 6 characters"), result)
     }
 
     @Test
@@ -27,7 +28,7 @@ class ValidatePasswordUseCaseTest {
         val input = "ASDASDASD"
         val result = validatePasswordUseCase(input)
 
-        assertEquals(PasswordResult.Invalid("Password must have at least 1 lowercase"), result)
+        assertEquals(com.fcorallini.authentication_domain.usecases.PasswordResult.Invalid("Password must have at least 1 lowercase"), result)
     }
 
     @Test
@@ -35,7 +36,7 @@ class ValidatePasswordUseCaseTest {
         val input = "asdasdas"
         val result = validatePasswordUseCase(input)
 
-        assertEquals(PasswordResult.Invalid("Password must have at least 1 uppercase"), result)
+        assertEquals(com.fcorallini.authentication_domain.usecases.PasswordResult.Invalid("Password must have at least 1 uppercase"), result)
     }
 
     @Test
@@ -43,7 +44,7 @@ class ValidatePasswordUseCaseTest {
         val input = "asdASDasd"
         val result = validatePasswordUseCase(input)
 
-        assertEquals(PasswordResult.Invalid("Password must have at least 1 digit"), result)
+        assertEquals(com.fcorallini.authentication_domain.usecases.PasswordResult.Invalid("Password must have at least 1 digit"), result)
     }
 
     @Test
@@ -51,6 +52,6 @@ class ValidatePasswordUseCaseTest {
         val input = "asdASDasd"
         val result = validatePasswordUseCase(input)
 
-        assertEquals(PasswordResult.Invalid("").javaClass, result.javaClass)
+        assertEquals(com.fcorallini.authentication_domain.usecases.PasswordResult.Invalid("").javaClass, result.javaClass)
     }
 }

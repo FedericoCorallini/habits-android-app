@@ -1,8 +1,9 @@
 package com.fcorallini.habits.authentication.data.repository
 
-import com.fcorallini.habits.authentication.domain.repository.AuthenticationRepository
+import com.fcorallini.authentication_domain.repository.AuthenticationRepository
 
-class FakeAuthenticationRepository : AuthenticationRepository {
+class FakeAuthenticationRepository :
+    com.fcorallini.authentication_domain.repository.AuthenticationRepository {
 
     var fakeError = false
 
